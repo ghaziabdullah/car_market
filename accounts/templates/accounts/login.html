@@ -1,0 +1,71 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    main {
+        margin: 40px auto;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #ff9900;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #ff8c00;
+    }
+
+    p {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+
+<main>
+    <h1>Login Your Account</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <br>
+    <p>Not Registered? <a href="{% url 'accounts:register' %}">Register Here</a></p>
+</main>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'carSelling/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    label {
+        font-weight: bold;
+        font-size: 16px;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #444;
+    }
+
+    .btn-primary {
+        background-color: #ff9900;
+        border-color: #ff9900;
+        padding: 12px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff8000;
+        border-color: #ff8000;
+    }
+</style>
+
+<div class="container">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <h1>Add a New Ad</h1>
+    {% for form in formset %}
+        <div class="form-group">
+            <label>{{ form.label_tag }}</label>
+            {{ form }}
+        </div>
+    {% endfor %}
+    <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </div>
+</form>
+</div>
+{% endblock %}
+

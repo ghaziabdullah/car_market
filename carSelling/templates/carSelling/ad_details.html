@@ -1,0 +1,168 @@
+{% extends "carSelling/base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+    }
+
+    .container {
+        padding: 30px;
+    }
+
+    .car-details {
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .car-details h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .location {
+        color: #555555;
+        margin-bottom: 20px;
+    }
+
+    .car-image {
+        text-align: center;
+    }
+
+    .car-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .car-specs {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .car-spec {
+        flex: 0 0 48%;
+        padding: 10px;
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .car-spec i {
+        font-size: 18px;
+        margin-right: 5px;
+        color: #007bff;
+    }
+
+    .car-spec p {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .safety-tips {
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .safety-tips h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .safety-tips ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .safety-tips li {
+        font-size: 16px;
+        margin-bottom: 10px;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .safety-tips li:before {
+        content: "\f058";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: #007bff;
+    }
+
+    .contact-info {
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .contact-info p {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .contact-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="car-details">
+                <h1>{{ car.brand }} {{ car.model }}</h1>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> {{ car.location }}</p>
+                <div class="car-image">
+                    <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
+                </div>
+                <div class="car-specs">
+                    <div class="car-spec"><i class="fas fa-cogs"></i><p>{{ car.engine_capacity }} cc</p></div>
+                    <div class="car-spec"><i class="fas fa-calendar"></i><p>{{ car.make_year }}</p></div>
+                    <div class="car-spec"><i class="fas fa-car"></i><p>{{ car.registered_in }}</p></div>
+                    <div class="car-spec"><i class="fas fa-road"></i><p>{{ car.mileage }} km</p></div>
+                    <div class="car-spec"><i class="fas fa-building"></i><p>{{ car.get_assembly_display }}</p></div>
+                    <div class="car-spec"><i class="fas fa-car"></i><p>{{ car.body_type }}</p></div>
+                    <div class="car-spec"><i class="fas fa-building"></i><p>{{ car.get_transmission_display }}</p></div>
+                    <div class="car-spec"><i class="fas fa-money-bill"></i><p>${{ car.price }}</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="safety-tips">
+                <h2><i class="fas fa-shield-alt"></i> Safety Tips for Transaction</h2>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Use a safe location to meet the seller</li>
+                    <li><i class="fas fa-money-bill"></i> Avoid cash transactions</li>
+                    <li><i class="fas fa-ban"></i> Beware of unrealistic offers</li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <p>Contact Seller</p>
+                <button class="btn btn-outline-success contact-button">Send Message</button>
+                <br>
+                <button class="btn btn-outline-danger contact-button">Show Phone Number</button>
+            </div>
+            <div class="seller-comments">
+                <p>{{ car.comments }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

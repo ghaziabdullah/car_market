@@ -1,0 +1,107 @@
+{% extends 'carSelling/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    #card{
+        margin-bottom: 5%;
+    }
+    .ad-card {
+        position: relative;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+    .card-body {
+        background-color: #ff9900;
+    }
+
+    .ad-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .ad-image-container {
+        position: relative;
+    }
+
+    .ad-image {
+        height: 240px; /* Set a fixed height for uniformity */
+        object-fit: cover;
+        transition: opacity 0.3s;
+    }
+
+    .ad-image:hover {
+        opacity: 0.5;
+    }
+
+    .ad-details-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .ad-card:hover .ad-details-button {
+        opacity: 1;
+    }
+
+    .ad-details-link {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+    }
+
+    .ad-details-link:hover {
+        background-color: #0056b3;
+    }
+
+    .ad-brand {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    #add {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #add:hover {
+        background-color: #ff9900;
+        color: #fff;
+    }
+</style>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Welcome to Car Market</h1>
+        <p>Explore and find your perfect ride</p>
+    </div>
+    <a href="{% url 'carSelling:new_ad' %}" id="add" class="btn btn-lg btn-warning">Post Your Ad!</a>
+    <div class="row mt-4">
+        {% for Ad in Ads %}
+        <div id="card" class="col-md-4">
+            <div class="card ad-card">
+                <div class="ad-image-container">
+                    <img class="card-img-top ad-image" src="{{ Ad.image.url }}" alt="Ad Image">
+                    <div class="ad-details-button">
+                        <a href="{% url 'carSelling:ad_detail' Ad.id %}" class="btn btn-primary ad-details-link">View Details</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="ad-brand">{{ Ad.brand }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
